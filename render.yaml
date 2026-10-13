@@ -1,0 +1,20 @@
+# Render Blueprint for the backend API.
+# Dashboard: New -> Blueprint -> point at this repo -> Render reads this file.
+services:
+  - type: web
+    name: drone-delivery-planner-api
+    runtime: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        sync: false
+      - key: CLIENT_URL
+        sync: false
